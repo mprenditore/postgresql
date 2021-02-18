@@ -30,6 +30,11 @@
 host  all  all  {{host}}  md5
 {% endfor %}
 
+# scram-sha-256 hashed password hosts
+{% for host in postgresql_pg_hba_scram_sha_256_hosts %}
+host  all  all  {{host}}  scram-sha-256
+{% endfor %}
+
 # Password hosts
 {% for host in postgresql_pg_hba_passwd_hosts %}
 host  all  all  {{host}}  password

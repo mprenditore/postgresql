@@ -77,6 +77,7 @@ postgresql_pg_hba_default:
   - { type: local, database: all, user: "{{ postgresql_admin_user }}", address: "", method: "peer map=root_as_{{ postgresql_admin_user }}", comment: "Local root Unix user, passwordless access" }
 
 postgresql_pg_hba_md5_hosts: []
+postgresql_pg_hba_scram_sha_256_hosts: []
 postgresql_pg_hba_passwd_hosts: []
 postgresql_pg_hba_trust_hosts: []
 postgresql_pg_hba_custom: []
