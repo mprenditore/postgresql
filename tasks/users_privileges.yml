@@ -15,20 +15,20 @@
   with_items: "{{postgresql_user_privileges}}"
   when: postgresql_users|length > 0
 
-- name: PostgreSQL | Update the user privileges advanced
+- name: PostgreSQL | Update the advanced user privileges
   postgresql_privs:
-    role: "{{item.name}}"
-    db: "{{item.db | default(omit)}}"
-    port: "{{postgresql_port}}"
-    objs: "{{item.objs | default('ALL_IN_SCHEMA')}}"
-    schema: "{{item.schema | default('public')}}"
-    priv: "{{item.priv | default(omit)}}"
-    state: "{{ item.state | default('present') }}"
     login_host: "{{item.host | default(omit)}}"
     login_user: "{{postgresql_admin_user}}"
-    role_attr_flags: "{{item.role_attr_flags | default(omit)}}"
+    port: "{{postgresql_port}}"
+    roles: "{{item.roles}}"
+    db: "{{item.db | default(omit)}}"
+    schema: "{{item.schema | default(omit)}}"
+    type: "{{item.type | default(omit)}}"
+    priv: "{{item.priv | default(omit)}}"
+    objs: "{{item.objs | default(omit)}}"
+    state: "{{item.state | default(omit)}}"
+    grant_option: "{{item.grant_option | default(omit)}}"
   become: yes
   become_user: "{{postgresql_admin_user}}"
-  with_items: "{{postgresql_user_privileges_advanced}}"
-  when:
-    - postgresql_users|length > 0
+  with_items: "{{postgresql_user_additional_privileges}}"
+  when: postgresql_user_additional_privileges|length > 0
